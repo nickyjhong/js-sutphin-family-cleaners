@@ -19,7 +19,7 @@ export default function Home() {
       setCompanies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getCompanies();
-  }, []);
+  }, [companiesCollectionRef]);
 
   return (
     <div>

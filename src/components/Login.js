@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import { auth } from "../firebase-config"
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth"
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 
-export default function Login() {
+export default function Login({ setIsAuth }) {
+  const navigate = useNavigate()
   const [ loginEmail, setLoginEmail ] = useState("")
   const [ loginPassword, setLoginPassword ] = useState("")
-  const [user, setUser] = useState({});
+  const [ user, setUser ] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -13,14 +15,13 @@ export default function Login() {
 
   const login = async () => {
     try {
-      const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      localStorage.setItem("isAuth", true);
+      setIsAuth(true);
+      navigate("/")
     } catch (error) {
       console.log(error.message)
     }
-  }
-
-  const logout = async () => {
-    await signOut(auth);
   }
 
   return (
@@ -44,7 +45,6 @@ export default function Login() {
       <h4> User Logged In: </h4>
       {user?.email}
 
-      <button onClick={logout}>Sign Out</button>
     </div>
   );
 }
