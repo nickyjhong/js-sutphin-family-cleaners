@@ -39,6 +39,7 @@ function App() {
                 <NavDropdown title="Admin" align="end">
                   <NavDropdown.Item href="/invoice/all">View Invoices</NavDropdown.Item>
                   <NavDropdown.Item href="/company/all">View Companies</NavDropdown.Item>
+                  <NavDropdown.Item href="/invoice/add">Add Invoice</NavDropdown.Item>
                   <NavDropdown.Item href="/company/add">Add Company</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>
@@ -59,9 +60,10 @@ function App() {
           <>
             <Route exact path='/' element={<Home />} />
             <Route exact path='/company/add' element={<CreateCompany />} />
+            <Route exact path='/company/invoices' element={<CompanyInvoices />} />
+            {/* <Route exact path='/company/:name' element={<SingleCompany />} /> */}
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
-            <Route exact path='/invoice/company' element={<CompanyInvoices />} />
-            <Route exact path='/invoice/company/num' element={<SingleInvoice />} />
+            <Route exact path='/invoice/:invoiceId' element={<SingleInvoice />} />
           </>
         ) : (
           <Route path="/" element={<Login setIsAuth={setIsAuth} />} />
