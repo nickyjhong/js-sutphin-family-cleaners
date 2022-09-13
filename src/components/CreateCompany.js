@@ -1,23 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import { db } from "../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function CreateCompany() {
-  const [newName, setNewName] = useState("");
+  const navigate = useNavigate();
+  const [newCompanyName, setNewCompanyName] = useState("");
+  const [newContact, setNewContact] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPhone, setNewPhone] = useState("");
-  const companiesCollectionRef = collection(db, "companies");
+  const companiesRef = collection(db, "companies");
 
   const createCompany = async () => {
-    await addDoc(companiesCollectionRef, {name: newName, email: newEmail, phone: newPhone})
+    await addDoc(companiesRef, {
+      name: newCompanyName,
+      contact: newContact,
+      email: newEmail,
+      phone: newPhone,
+    });
+    navigate("/");
   };
 
   return (
     <div>
       <input
-        placeholder="Name"
+        placeholder="Company Name"
         onChange={(event) => {
-          setNewName(event.target.value);
+          setNewCompanyName(event.target.value);
+        }}
+      />
+
+      <input
+        placeholder="Contact Name"
+        onChange={(event) => {
+          setNewContact(event.target.value);
         }}
       />
 
@@ -36,5 +52,5 @@ export default function CreateCompany() {
       />
       <button onClick={createCompany}>Add Company</button>
     </div>
-  )
+  );
 }

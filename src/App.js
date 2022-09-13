@@ -4,9 +4,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { auth } from "./firebase-config"
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Home from './components/Home';
 import Login from './components/Login';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import CreateCompany from './components/CreateCompany';
+import SingleInvoice from './components/SingleInvoice';
+import AllInvoices from './components/AllInvoices';
+import CompanyInvoices from './components/CompanyInvoices';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -24,7 +28,7 @@ function App() {
         {isAuth ? (
           <Navbar bg="nav" sticky="top" expand="sm" collapseOnSelect>
             <Navbar.Brand className="nav-logo" href="/">
-              <img src="../logo.png" alt="logo" height="30px" className="nav-logo-img" />{' '}
+              <img src="../logo.png" alt="logo" height="25px" className="nav-logo-img" />{' '}
               Sutphin Family Cleaners
             </Navbar.Brand>
 
@@ -33,9 +37,9 @@ function App() {
               <Nav className="nav-links">
                 <Nav.Link href="/">Home</Nav.Link>
                 <NavDropdown title="Admin" align="end">
-                  <NavDropdown.Item href="/">View Invoices</NavDropdown.Item>
-                  <NavDropdown.Item href="/">View Companies</NavDropdown.Item>
-                  <NavDropdown.Item href="/">Add Company</NavDropdown.Item>
+                  <NavDropdown.Item href="/invoice/all">View Invoices</NavDropdown.Item>
+                  <NavDropdown.Item href="/company/all">View Companies</NavDropdown.Item>
+                  <NavDropdown.Item href="/company/add">Add Company</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="/" onClick={logout}>Logout</NavDropdown.Item>
                 </NavDropdown>
@@ -53,7 +57,11 @@ function App() {
       <Routes>
         {isAuth ? (
           <>
-            <Route exact path='/' element={<Home />} />  
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/company/add' element={<CreateCompany />} />
+            <Route exact path='/invoice/all' element={<AllInvoices /> } />
+            <Route exact path='/invoice/company' element={<CompanyInvoices />} />
+            <Route exact path='/invoice/company/num' element={<SingleInvoice />} />
           </>
         ) : (
           <Route path="/" element={<Login setIsAuth={setIsAuth} />} />

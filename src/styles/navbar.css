@@ -19,5 +19,13 @@
 }
 
 .nav-logo-img {
-  padding: 0 .5rem 0 0;
+  padding-right: .5rem;
+}
+
+.navbar-brand {
+  font-size: 1rem !important;
+}
+
+nav {
+  padding: 0 !important;
 }
