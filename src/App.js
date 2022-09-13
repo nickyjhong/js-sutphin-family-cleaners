@@ -11,6 +11,7 @@ import CreateCompany from './components/CreateCompany';
 import SingleInvoice from './components/SingleInvoice';
 import AllInvoices from './components/AllInvoices';
 import CompanyInvoices from './components/CompanyInvoices';
+import CreateInvoice from './components/CreateInvoice';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -60,10 +61,11 @@ function App() {
           <>
             <Route exact path='/' element={<Home />} />
             <Route exact path='/company/add' element={<CreateCompany />} />
-            <Route exact path='/company/invoices' element={<CompanyInvoices />} />
             {/* <Route exact path='/company/:name' element={<SingleCompany />} /> */}
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
+            <Route exact path='/invoice/add' element={<CreateInvoice />} />
             <Route exact path='/invoice/:invoiceId' element={<SingleInvoice />} />
+            <Route exact path='/:companyName/invoices' element={<CompanyInvoices />} />
           </>
         ) : (
           <Route path="/" element={<Login setIsAuth={setIsAuth} />} />

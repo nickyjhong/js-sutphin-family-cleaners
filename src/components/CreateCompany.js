@@ -5,18 +5,18 @@ import { collection, addDoc } from "firebase/firestore";
 
 export default function CreateCompany() {
   const navigate = useNavigate();
-  const [newCompanyName, setNewCompanyName] = useState("");
-  const [newContact, setNewContact] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const [newPhone, setNewPhone] = useState("");
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const companiesRef = collection(db, "companies");
 
   const createCompany = async () => {
     await addDoc(companiesRef, {
-      name: newCompanyName,
-      contact: newContact,
-      email: newEmail,
-      phone: newPhone,
+      name,
+      contact,
+      email,
+      phone,
     });
     navigate("/");
   };
@@ -26,28 +26,28 @@ export default function CreateCompany() {
       <input
         placeholder="Company Name"
         onChange={(event) => {
-          setNewCompanyName(event.target.value);
+          setName(event.target.value);
         }}
       />
 
       <input
         placeholder="Contact Name"
         onChange={(event) => {
-          setNewContact(event.target.value);
+          setContact(event.target.value);
         }}
       />
 
       <input
         placeholder="Email"
         onChange={(event) => {
-          setNewEmail(event.target.value);
+          setEmail(event.target.value);
         }}
       />
 
       <input
         placeholder="Phone"
         onChange={(event) => {
-          setNewPhone(event.target.value);
+          setPhone(event.target.value);
         }}
       />
       <button onClick={createCompany}>Add Company</button>

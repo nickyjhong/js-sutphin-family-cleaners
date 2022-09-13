@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { db } from "../firebase-config";
 import { collectionGroup, query, where, getDocs } from "firebase/firestore";  
 
 export default function CompanyInvoices() {
+  let { companyName } = useParams();
   const [invoices, setInvoices] = useState([]);
-  const invoicesRef = query(collectionGroup(db, 'invoices'), where('companyName', '==', 'sixt'))
+  const invoicesRef = query(collectionGroup(db, 'invoices'), where('companyName', '==', companyName))
 
   useEffect(() => {
     const getInvoices = async () => {
