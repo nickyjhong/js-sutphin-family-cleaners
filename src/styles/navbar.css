@@ -1,0 +1,23 @@
+.bg-nav{
+  background: #F5F0ED
+}
+
+.right-aligned {
+  justify-content: flex-end;
+  padding-right: 3rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.nav-logo {
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  padding: 0 .5rem 0 0;
+}
