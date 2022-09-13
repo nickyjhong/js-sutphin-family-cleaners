@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { db } from "../firebase-config";
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export default function CreateCompany() {
   const navigate = useNavigate();
@@ -9,10 +9,10 @@ export default function CreateCompany() {
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const companiesRef = collection(db, "companies");
 
   const createCompany = async () => {
-    await addDoc(companiesRef, {
+    let docId = name.split(' ').join('').toLowerCase()
+    await setDoc(doc(db, 'companies', docId), {
       name,
       contact,
       email,

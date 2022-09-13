@@ -1,31 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { db } from "../firebase-config";
-import { addDoc, doc, collection, collectionGroup, query, where } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export default function CreateInvoice() {
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
   const [invoiceId, setInvoiceId] = useState("");
-  // const [items, setItems] = useState([]);
   const [price, setPrice] = useState("");
   const [pickUpDate, setPickUpDate] = useState("");
   const [dropOffDate, setDropOffDate] = useState("");
-  const [isPaid, setIsPaid] = useState(false);
-  // const invoicesCollectionRef = collection(db, 'companies').doc(companyName).collection('invoices').doc('invoiceId')
-  const invoicesCollectionRef = query(collectionGroup(db, 'invoices'), where('companyName', '==', companyName))
+  let companyId = companyName.split(' ').join('').toLowerCase()
 
-  const createInvoice = async () => {
-    await addDoc(invoicesCollectionRef, {
+  let path = `companies/${companyId}/invoices`
+
+  const createInvoice = async (event) => {
+    event.preventDefault()
+    const docRef = doc(db, path, invoiceId)
+    await setDoc(docRef, {
       companyName,
       invoiceId,
-      // items,
       price,
       pickUpDate,
       dropOffDate,
-      isPaid
+      isPaid: false
     })
-    navigate(`invoice/${invoiceId}`)
+    navigate('/')
   }
   return (
     <div>
@@ -42,13 +42,6 @@ export default function CreateInvoice() {
           setInvoiceId(event.target.value);
         }}
       />
-
-      {/* <input
-        placeholder="Items"
-        onChange={(event) => {
-          setItems(event.target.value);
-        }}
-      /> */}
 
       <input
         placeholder="Price"
