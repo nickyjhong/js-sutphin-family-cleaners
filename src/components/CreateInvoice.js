@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { db } from "../firebase-config";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, collection, getDocs } from "firebase/firestore";
 
 export default function CreateInvoice() {
   const navigate = useNavigate();
@@ -10,9 +11,18 @@ export default function CreateInvoice() {
   const [price, setPrice] = useState("");
   const [pickUpDate, setPickUpDate] = useState("");
   const [dropOffDate, setDropOffDate] = useState("");
+  const [companies, setCompanies] = useState([]);
+  const companiesRef = collection(db, "companies");
   let companyId = companyName.split(' ').join('').toLowerCase()
-
   let path = `companies/${companyId}/invoices`
+
+  useEffect(() => {
+    const getCompanies = async () => {
+      const data = await getDocs(companiesRef);
+      setCompanies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getCompanies();
+  }, []);
 
   const createInvoice = async (event) => {
     event.preventDefault()
@@ -29,12 +39,18 @@ export default function CreateInvoice() {
   }
   return (
     <div>
-      <input
-        placeholder="Company Name"
+      <select
+        name='company'
         onChange={(event) => {
           setCompanyName(event.target.value);
         }}
-      />
+      >
+        {companies.map((company) => {
+          return (
+            <option key={company.id} value={company.name}>{company.name}</option>
+          )
+        })}
+      </select>
 
       <input
         placeholder="Invoice #"

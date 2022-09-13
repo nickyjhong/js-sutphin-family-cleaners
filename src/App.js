@@ -12,6 +12,7 @@ import SingleInvoice from './components/SingleInvoice';
 import AllInvoices from './components/AllInvoices';
 import CompanyInvoices from './components/CompanyInvoices';
 import CreateInvoice from './components/CreateInvoice';
+import UpdateInvoice from './components/UpdateInvoice';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -65,6 +66,7 @@ function App() {
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
             <Route exact path='/invoice/add' element={<CreateInvoice />} />
             <Route exact path='/invoice/:invoiceId' element={<SingleInvoice />} />
+            <Route exact path='/invoice/:invoiceId/update' element={<UpdateInvoice />} />
             <Route exact path='/:companyName/invoices' element={<CompanyInvoices />} />
           </>
         ) : (
