@@ -30,6 +30,7 @@ export default function CreateInvoice() {
     const docRef = doc(db, path, invoiceId)
     await setDoc(docRef, {
       companyName,
+      companyId,
       invoiceId,
       invoiceLink,
       price,
