@@ -14,21 +14,17 @@ export default function SingleInvoice() {
 
   useEffect(() => {
     const getInvoice = async () => {
-      const data = await getDocs(invoiceRef);
-      setInvoices(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getInvoice();
-  }, []);
+      const docSnaps = await getDocs(invoiceRef)
+      setInvoices(docSnaps.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
+    }
+    getInvoice()
+  }, [])
+
+  const invoice = invoices[0] || {} 
 
   return (
     <div>
-      {invoices.map((invoice) => {
-        return (
-          <div key={invoice.id}>
-            <p>{invoice.invoiceId}</p>
-          </div>
-        );
-      })}
+      <p>{invoice.invoiceId}</p>
     </div>
   );
 }
