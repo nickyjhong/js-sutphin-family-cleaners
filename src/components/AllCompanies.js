@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import { collectionGroup, query, getDocs } from "firebase/firestore";  
 
@@ -20,7 +21,9 @@ export default function AllCompanies() {
       {companies.map((company => {
         return (
           <div key={company.id}>
-            <p>{company.name}</p>
+            <Link to={`/company/${company.companyId}`}>
+              {company.name}
+            </Link>
           </div>
         )
       }))}

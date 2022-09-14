@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import { collectionGroup, query, where, getDocs } from "firebase/firestore";  
 
@@ -22,7 +23,9 @@ export default function CompanyInvoices() {
       {invoices.map((invoice => {
         return (
           <div key={invoice.id}>
-            <p>{invoice.invoiceId}</p>
+            <Link to={`/invoice/${invoice.invoiceId}`}>
+              {invoice.invoiceId}
+            </Link>
           </div>
         )
       }))}
