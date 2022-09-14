@@ -49,8 +49,8 @@ h1 {
   margin: 0 auto;
 }
 
-input::placeholder {
-  color: #b197e0;
+.form-input::placeholder {
+  color: #9d68ff;
   font-weight: bold;
 }
 

@@ -5,6 +5,7 @@
 @import 'invoice.css';
 @import 'companies.css';
 @import 'company.css';
+@import 'form.css';
 
 html {
   font-size: 2vh;
