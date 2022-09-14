@@ -16,28 +16,38 @@ export default function UpdateInvoice() {
   const [newPickUpDate, setNewPickUpDate] = useState("");
   const [newDropOffDate, setNewDropOffDate] = useState("");
   const [newIsPaid, setNewIsPaid] = useState(invoice.isPaid);
+  const [paid, setPaid] = useState(newIsPaid);
 
   const handlePaid = async () => {
     setNewIsPaid((newIsPaid) => !newIsPaid);
-    updatePaid(invoice.id)
+    setPaid(newIsPaid);
+    updatePaid(invoice.id);
   };
 
   const updatePaid = async (id, isPaid) => {
-    const update = { isPaid: newIsPaid }
-    await updateDoc(invoiceRef, update)
-  }
+    const update = { isPaid: newIsPaid };
+    await updateDoc(invoiceRef, update);
+  };
 
-  const updateInvoice = async (id, companyName, link, price, pickUpDate, dropOffDate, isPaid) => {
+  const updateInvoice = async (
+    id,
+    companyName,
+    link,
+    price,
+    pickUpDate,
+    dropOffDate,
+    isPaid
+  ) => {
     const newFields = {
       companyName: newCompanyName,
       link: newLink,
       price: newPrice,
       pickUpDate: newPickUpDate,
       dropOffDate: newDropOffDate,
-      isPaid: newIsPaid
+      isPaid: newIsPaid,
     };
     await updateDoc(invoiceRef, newFields);
-    navigate(`/invoice/${invoiceLC}`)
+    navigate(`/invoice/${invoiceLC}`);
   };
 
   useEffect(() => {
@@ -56,16 +66,9 @@ export default function UpdateInvoice() {
     setNewIsPaid(invoice.isPaid);
   }, [invoice]);
 
-  console.log('paid', invoice.isPaid)
-  console.log('invoice', invoice)
-  console.log('new', newIsPaid)
   return (
     <div>
-      {invoice.isPaid ? (
-        <p>Status: PAID</p>
-      ) : (
-        <p>Status: UNPAID</p>
-      )}
+      {paid ? <p>Status: PAID</p> : <p>Status: UNPAID</p>}
 
       <input
         name="Company Name"
@@ -75,7 +78,6 @@ export default function UpdateInvoice() {
           setNewCompanyName(event.target.value);
         }}
       />
-      
 
       <input
         name="link"
@@ -113,8 +115,7 @@ export default function UpdateInvoice() {
         }}
       />
 
-      
-      {invoice.isPaid ? (
+      {paid ? (
         <button onClick={handlePaid}>Already paid!</button>
       ) : (
         <button onClick={handlePaid}>Pay</button>
