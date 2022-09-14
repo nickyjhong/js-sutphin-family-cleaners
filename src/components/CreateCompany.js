@@ -19,7 +19,7 @@ export default function CreateCompany() {
       email,
       phone,
     });
-    navigate("/");
+    navigate(`/company/${docId}`);
   };
 
   return (

@@ -1,142 +1,132 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { db } from "../firebase-config";
-import {
-  setDoc,
-  doc,
-  collection,
-  getDocs,
-  collectionGroup,
-  query,
-  where,
-} from "firebase/firestore";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
 
 export default function UpdateInvoice() {
-  let { invoiceId } = useParams();
-  const [invoices, setInvoices] = useState([]);
-  const invoiceRef = query(
-    collectionGroup(db, "invoices"),
-    where("invoiceId", "==", invoiceId)
-  );
-  const invoice = invoices[0] || {};
+  let { invoiceLC } = useParams();
   const navigate = useNavigate();
+  const [invoice, setInvoice] = useState({});
+  const invoiceRef = doc(db, "invoices", invoiceLC);
 
-  const [companyName, setCompanyName] = useState("");
-  const [invoiceLink, setInvoiceLink] = useState("");
-  const [price, setPrice] = useState("");
-  const [pickUpDate, setPickUpDate] = useState("");
-  const [dropOffDate, setDropOffDate] = useState("");
-  const [companies, setCompanies] = useState([]);
-  const [isPaid, setIsPaid] = useState(false)
-  const companiesRef = collection(db, "companies");
+  const [newCompanyName, setNewCompanyName] = useState("");
+  const [newLink, setNewLink] = useState("");
+  const [newPrice, setNewPrice] = useState("");
+  const [newPickUpDate, setNewPickUpDate] = useState("");
+  const [newDropOffDate, setNewDropOffDate] = useState("");
+  const [newIsPaid, setNewIsPaid] = useState(invoice.isPaid);
 
-  let companyId = companyName.split(" ").join("").toLowerCase();
-  let path = `companies/${companyId}/invoices`;
-
-  const updateInvoice = async (event) => {
-    event.preventDefault();
-    const docRef = doc(db, path, invoiceId);
-    await setDoc(docRef, {
-      companyName,
-      companyId,
-      invoiceId,
-      invoiceLink,
-      price,
-      pickUpDate,
-      dropOffDate,
-      isPaid,
-    });
-    navigate("/");
+  const handlePaid = async () => {
+    setNewIsPaid((newIsPaid) => !newIsPaid);
+    updatePaid(invoice.id)
   };
 
-  const handlePaid = () => {
-    setIsPaid(isPaid => !isPaid)
+  const updatePaid = async (id, isPaid) => {
+    const update = { isPaid: newIsPaid }
+    await updateDoc(invoiceRef, update)
   }
 
-  useEffect(() => {
-    const getCompanies = async () => {
-      const data = await getDocs(companiesRef);
-      setCompanies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  const updateInvoice = async (id, companyName, link, price, pickUpDate, dropOffDate, isPaid) => {
+    const newFields = {
+      companyName: newCompanyName,
+      link: newLink,
+      price: newPrice,
+      pickUpDate: newPickUpDate,
+      dropOffDate: newDropOffDate,
+      isPaid: newIsPaid
     };
-    getCompanies();
-  }, []);
+    await updateDoc(invoiceRef, newFields);
+    navigate(`/invoice/${invoiceLC}`)
+  };
 
   useEffect(() => {
     const getInvoice = async () => {
-      const docSnaps = await getDocs(invoiceRef);
-      setInvoices(docSnaps.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const docSnap = await getDoc(invoiceRef);
+      setInvoice(docSnap.data());
     };
     getInvoice();
   }, []);
 
   useEffect(() => {
-    setInvoiceLink(invoice.invoiceLink)
-    setPrice(invoice.price)
-    setPickUpDate(invoice.pickUpDate)
-    setDropOffDate(invoice.dropOffDate)
-    setIsPaid(invoice.isPaid)
-  }, [invoice])
+    setNewCompanyName(invoice.companyName);
+    setNewPrice(invoice.price);
+    setNewPickUpDate(invoice.pickUpDate);
+    setNewDropOffDate(invoice.dropOffDate);
+    setNewIsPaid(invoice.isPaid);
+  }, [invoice]);
 
-  console.log('paid', isPaid)
+  console.log('paid', invoice.isPaid)
+  console.log('invoice', invoice)
+  console.log('new', newIsPaid)
   return (
     <div>
-      <p>Invoice Id: {invoice.invoiceId}</p>
-      <p>Company Name: {invoice.companyName}</p>
+      {invoice.isPaid ? (
+        <p>Status: PAID</p>
+      ) : (
+        <p>Status: UNPAID</p>
+      )}
 
-      <p>Confirm company name:</p>
-      <select
-        name="company"
+      <input
+        name="Company Name"
+        defaultValue={invoice.companyName}
         onChange={(event) => {
-          setCompanyName(event.target.value);
+          event.preventDefault();
+          setNewCompanyName(event.target.value);
+        }}
+      />
+      
+
+      <input
+        name="link"
+        defaultValue={invoice.link}
+        onChange={(event) => {
+          event.preventDefault();
+          setNewLink(event.target.value);
+        }}
+      />
+
+      <input
+        name="price"
+        defaultValue={invoice.price}
+        onChange={(event) => {
+          event.preventDefault();
+          setNewPrice(event.target.value);
+        }}
+      />
+
+      <input
+        name="pickUpDate"
+        defaultValue={invoice.pickUpDate}
+        onChange={(event) => {
+          event.preventDefault();
+          setNewPickUpDate(event.target.value);
+        }}
+      />
+
+      <input
+        name="dropOffDate"
+        defaultValue={invoice.dropOffDate}
+        onChange={(event) => {
+          event.preventDefault();
+          setNewDropOffDate(event.target.value);
+        }}
+      />
+
+      
+      {invoice.isPaid ? (
+        <button onClick={handlePaid}>Already paid!</button>
+      ) : (
+        <button onClick={handlePaid}>Pay</button>
+      )}
+
+      <button
+        onClick={() => {
+          updateInvoice(invoice.id);
         }}
       >
-        <option value="Companies" />
-        {companies.map((company) => {
-          return (
-            <option key={company.id} value={company.name}>
-              {company.name}
-            </option>
-          );
-        })}
-      </select>
-
-      <input
-        defaultValue={invoice.invoiceLink}
-        placeholder="Invoice Link"
-        onChange={(event) => {
-          setInvoiceLink(event.target.value);
-        }}
-      />
-
-      <input
-        defaultValue={invoice.price}
-        placeholder="Price"
-        onChange={(event) => {
-          setPrice(event.target.value);
-        }}
-      />
-
-      <input
-        defaultValue={invoice.pickUpDate}
-        placeholder="Pick Up Date"
-        onChange={(event) => {
-          setPickUpDate(event.target.value);
-        }}
-      />
-
-      <input
-        defaultValue={invoice.dropOffDate}
-        placeholder="Drop Off Date"
-        onChange={(event) => {
-          setDropOffDate(event.target.value);
-        }}
-      />
-
-      <button onClick={handlePaid}>Paid</button>
-
-      <button onClick={updateInvoice}>Update Invoice</button>
+        Save Changes
+      </button>
     </div>
   );
 }

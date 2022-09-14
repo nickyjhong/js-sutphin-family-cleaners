@@ -2,25 +2,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { db } from "../firebase-config";
-import { collectionGroup, query, where, getDocs } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 
 export default function SingleInvoice() {
-  let { invoiceId } = useParams();
-  const [invoices, setInvoices] = useState([]);
-  const invoiceRef = query(
-    collectionGroup(db, "invoices"),
-    where("invoiceId", "==", invoiceId)
-  );
+
+  let { invoiceLC } = useParams();
+  const [invoice, setInvoice] = useState({});
+  const invoiceRef = doc(db, "invoices", invoiceLC);
 
   useEffect(() => {
     const getInvoice = async () => {
-      const docSnaps = await getDocs(invoiceRef)
-      setInvoices(docSnaps.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
+      const docSnap = await getDoc(invoiceRef)
+      setInvoice(docSnap.data())
     }
     getInvoice()
   }, [])
 
-  const invoice = invoices[0] || {} 
+
 
   return (
     <div>

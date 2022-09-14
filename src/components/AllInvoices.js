@@ -21,7 +21,7 @@ export default function AllInvoices() {
       {invoices.map((invoice) => {
         return (
           <div key={invoice.id}>
-            <Link to={`/invoice/${invoice.invoiceId}`}>
+            <Link to={`/invoice/${invoice.invoiceLC}`}>
               {invoice.invoiceId}
             </Link>
           </div>

@@ -1,21 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { db } from "../firebase-config";
-import { setDoc, doc, collection, getDocs } from "firebase/firestore";
+import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 
 export default function CreateInvoice() {
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
   const [invoiceId, setInvoiceId] = useState("");
+  const [link, setLink] = useState("");
   const [price, setPrice] = useState("");
   const [pickUpDate, setPickUpDate] = useState("");
   const [dropOffDate, setDropOffDate] = useState("");
-  const [invoiceLink, setInvoiceLink] = useState("");
+  const [isPaid, setIsPaid] = useState(false)
   const [companies, setCompanies] = useState([]);
   const companiesRef = collection(db, "companies");
-  let companyId = companyName.split(" ").join("").toLowerCase();
-  let path = `companies/${companyId}/invoices`;
+
+  const createInvoice = async () => {
+    let docId = invoiceId.toLowerCase()
+    await setDoc(doc(db, 'invoices', docId), {
+      companyName,
+      invoiceId,
+      link,
+      invoiceLC: invoiceId.toLowerCase(),
+      price,
+      pickUpDate,
+      dropOffDate,
+      isPaid
+    });
+    navigate("/");
+  };
 
   useEffect(() => {
     const getCompanies = async () => {
@@ -25,21 +39,7 @@ export default function CreateInvoice() {
     getCompanies();
   }, []);
 
-  const createInvoice = async (event) => {
-    event.preventDefault();
-    const docRef = doc(db, path, invoiceId);
-    await setDoc(docRef, {
-      companyName,
-      companyId,
-      invoiceId,
-      invoiceLink,
-      price,
-      pickUpDate,
-      dropOffDate,
-      isPaid: false,
-    });
-    navigate("/");
-  };
+
   return (
     <div>
       <select
@@ -57,7 +57,7 @@ export default function CreateInvoice() {
           );
         })}
       </select>
-
+      
       <input
         placeholder="Invoice #"
         onChange={(event) => {
@@ -68,7 +68,7 @@ export default function CreateInvoice() {
       <input
         placeholder="Invoice Link"
         onChange={(event) => {
-          setInvoiceLink(event.target.value);
+          setLink(event.target.value);
         }}
       />
 
@@ -92,8 +92,7 @@ export default function CreateInvoice() {
           setDropOffDate(event.target.value);
         }}
       />
-
-      <button onClick={createInvoice}>Add Invoice</button>
+      <button onClick={createInvoice}>Add Company</button>
     </div>
   );
 }

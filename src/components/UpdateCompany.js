@@ -65,7 +65,7 @@ export default function UpdateCompany() {
           updateCompany(company.id);
         }}
       >
-        Update Company
+        Save Changes
       </button>
     </div>
   );

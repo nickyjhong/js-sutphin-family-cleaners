@@ -53,9 +53,10 @@ function App() {
             </Navbar.Collapse>
           </Navbar>
         ) : (
-          <Navbar bg="nav" sticky="top">
-            <Navbar.Brand>
-              SFC
+          <Navbar bg="nav" sticky="top" expand="sm" collapseOnSelect>
+            <Navbar.Brand className="nav-logo" href="/">
+              <img src="/logo.png" alt="logo" height="25px" className="nav-logo-img" />{' '}
+              Sutphin Family Cleaners
             </Navbar.Brand>
           </Navbar>
         )}
@@ -70,8 +71,8 @@ function App() {
             <Route path='/company/:companyId' element={<SingleCompany />} />
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
             <Route exact path='/invoice/add' element={<CreateInvoice />} />
-            <Route exact path='/invoice/:invoiceId' element={<SingleInvoice />} />
-            <Route exact path='/invoice/:invoiceId/update' element={<UpdateInvoice />} />
+            <Route exact path='/invoice/:invoiceLC' element={<SingleInvoice />} />
+            <Route exact path='/invoice/:invoiceLC/update' element={<UpdateInvoice />} />
             <Route exact path='/:company/invoices' element={<CompanyInvoices />} />
           </>
         ) : (
