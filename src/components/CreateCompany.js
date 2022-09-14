@@ -14,6 +14,7 @@ export default function CreateCompany() {
     let docId = name.split(' ').join('').toLowerCase()
     await setDoc(doc(db, 'companies', docId), {
       name,
+      companyId: docId,
       contact,
       email,
       phone,

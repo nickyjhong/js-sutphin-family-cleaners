@@ -11,6 +11,7 @@ export default function CreateInvoice() {
   const [price, setPrice] = useState("");
   const [pickUpDate, setPickUpDate] = useState("");
   const [dropOffDate, setDropOffDate] = useState("");
+  const [invoiceLink, setInvoiceLink] = useState("");
   const [companies, setCompanies] = useState([]);
   const companiesRef = collection(db, "companies");
   let companyId = companyName.split(' ').join('').toLowerCase()
@@ -30,6 +31,7 @@ export default function CreateInvoice() {
     await setDoc(docRef, {
       companyName,
       invoiceId,
+      invoiceLink,
       price,
       pickUpDate,
       dropOffDate,
@@ -45,6 +47,7 @@ export default function CreateInvoice() {
           setCompanyName(event.target.value);
         }}
       >
+        <option value="Companies"></option>
         {companies.map((company) => {
           return (
             <option key={company.id} value={company.name}>{company.name}</option>
@@ -56,6 +59,13 @@ export default function CreateInvoice() {
         placeholder="Invoice #"
         onChange={(event) => {
           setInvoiceId(event.target.value);
+        }}
+      />
+
+<input
+        placeholder="Invoice Link"
+        onChange={(event) => {
+          setInvoiceLink(event.target.value);
         }}
       />
 

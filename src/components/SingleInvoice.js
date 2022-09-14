@@ -6,7 +6,7 @@ import { collectionGroup, query, where, getDocs } from "firebase/firestore";
 
 export default function SingleInvoice() {
   let { invoiceId } = useParams();
-  const [invoice, setInvoice] = useState([]);
+  const [invoices, setInvoices] = useState([]);
   const invoiceRef = query(
     collectionGroup(db, "invoices"),
     where("invoiceId", "==", invoiceId)
@@ -15,17 +15,17 @@ export default function SingleInvoice() {
   useEffect(() => {
     const getInvoice = async () => {
       const data = await getDocs(invoiceRef);
-      setInvoice(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setInvoices(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getInvoice();
   }, []);
 
   return (
     <div>
-      {invoice.map((inv) => {
+      {invoices.map((invoice) => {
         return (
-          <div key={inv.id}>
-            <p>{inv.invoiceId}</p>
+          <div key={invoice.id}>
+            <p>{invoice.invoiceId}</p>
           </div>
         );
       })}

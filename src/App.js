@@ -7,9 +7,11 @@ import { auth } from "./firebase-config"
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Home from './components/Home';
 import Login from './components/Login';
+import AllCompanies from './components/AllCompanies';
+import SingleCompany from './components/SingleCompany';
 import CreateCompany from './components/CreateCompany';
-import SingleInvoice from './components/SingleInvoice';
 import AllInvoices from './components/AllInvoices';
+import SingleInvoice from './components/SingleInvoice';
 import CompanyInvoices from './components/CompanyInvoices';
 import CreateInvoice from './components/CreateInvoice';
 import UpdateInvoice from './components/UpdateInvoice';
@@ -62,7 +64,8 @@ function App() {
           <>
             <Route exact path='/' element={<Home />} />
             <Route exact path='/company/add' element={<CreateCompany />} />
-            {/* <Route exact path='/company/:name' element={<SingleCompany />} /> */}
+            <Route exact path='/company/all' element={<AllCompanies />} />
+            <Route path='/company/:companyName' element={<SingleCompany />} />
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
             <Route exact path='/invoice/add' element={<CreateInvoice />} />
             <Route exact path='/invoice/:invoiceId' element={<SingleInvoice />} />
