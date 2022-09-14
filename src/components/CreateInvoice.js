@@ -14,8 +14,8 @@ export default function CreateInvoice() {
   const [invoiceLink, setInvoiceLink] = useState("");
   const [companies, setCompanies] = useState([]);
   const companiesRef = collection(db, "companies");
-  let companyId = companyName.split(' ').join('').toLowerCase()
-  let path = `companies/${companyId}/invoices`
+  let companyId = companyName.split(" ").join("").toLowerCase();
+  let path = `companies/${companyId}/invoices`;
 
   useEffect(() => {
     const getCompanies = async () => {
@@ -26,8 +26,8 @@ export default function CreateInvoice() {
   }, []);
 
   const createInvoice = async (event) => {
-    event.preventDefault()
-    const docRef = doc(db, path, invoiceId)
+    event.preventDefault();
+    const docRef = doc(db, path, invoiceId);
     await setDoc(docRef, {
       companyName,
       companyId,
@@ -36,23 +36,25 @@ export default function CreateInvoice() {
       price,
       pickUpDate,
       dropOffDate,
-      isPaid: false
-    })
-    navigate('/')
-  }
+      isPaid: false,
+    });
+    navigate("/");
+  };
   return (
     <div>
       <select
-        name='company'
+        name="company"
         onChange={(event) => {
           setCompanyName(event.target.value);
         }}
       >
-        <option value="Companies"></option>
+        <option value="Companies" />
         {companies.map((company) => {
           return (
-            <option key={company.id} value={company.name}>{company.name}</option>
-          )
+            <option key={company.id} value={company.name}>
+              {company.name}
+            </option>
+          );
         })}
       </select>
 
@@ -63,7 +65,7 @@ export default function CreateInvoice() {
         }}
       />
 
-<input
+      <input
         placeholder="Invoice Link"
         onChange={(event) => {
           setInvoiceLink(event.target.value);
@@ -93,5 +95,5 @@ export default function CreateInvoice() {
 
       <button onClick={createInvoice}>Add Invoice</button>
     </div>
-  )
+  );
 }

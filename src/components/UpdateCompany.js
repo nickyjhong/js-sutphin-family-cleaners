@@ -14,9 +14,8 @@ export default function UpdateCompany() {
   const [newPhone, setNewPhone] = useState("");
 
   const updateCompany = async (id, contact, email, phone) => {
-    const userDoc = doc(db, "companies", companyId);
     const newFields = { contact: newContact, email: newEmail, phone: newPhone };
-    await updateDoc(userDoc, newFields);
+    await updateDoc(companyRef, newFields);
   };
 
   useEffect(() => {
