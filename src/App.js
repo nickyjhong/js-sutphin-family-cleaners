@@ -73,7 +73,7 @@ function App() {
             <Route exact path='/invoice/add' element={<CreateInvoice />} />
             <Route exact path='/invoice/:invoiceLC' element={<SingleInvoice />} />
             <Route exact path='/invoice/:invoiceLC/update' element={<UpdateInvoice />} />
-            <Route exact path='/:company/invoices' element={<CompanyInvoices />} />
+            <Route exact path='/:companyId/invoices' element={<CompanyInvoices />} />
           </>
         ) : (
           <Route path="/" element={<Login setIsAuth={setIsAuth} />} />

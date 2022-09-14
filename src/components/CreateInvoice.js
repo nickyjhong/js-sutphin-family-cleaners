@@ -20,10 +20,11 @@ export default function CreateInvoice() {
     let docId = invoiceId.toLowerCase()
     await setDoc(doc(db, 'invoices', docId), {
       companyName,
+      companyId: companyName.split(' ').join('').toLowerCase(),
       invoiceId,
       link,
       invoiceLC: invoiceId.toLowerCase(),
-      price,
+      price: Number(price),
       pickUpDate,
       dropOffDate,
       isPaid
@@ -92,7 +93,7 @@ export default function CreateInvoice() {
           setDropOffDate(event.target.value);
         }}
       />
-      <button onClick={createInvoice}>Add Company</button>
+      <button onClick={createInvoice}>Create Invoice</button>
     </div>
   );
 }

@@ -1,0 +1,65 @@
+.invoices-container {
+  margin: 1rem;
+}
+
+.invoice-paid {
+  background: rgb(222, 244, 227);
+  border: 1px solid rgb(229, 243, 229);
+}
+
+.invoice-unpaid {
+  background: rgb(247, 216, 216);
+  border: 1px solid rgb(247, 216, 216);
+}
+
+.invoice-container {
+  border-radius: 5px;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.01);
+  padding: .5rem 1rem;
+  margin: 2rem 3rem 1rem 3rem;
+}
+
+.invoice-link {
+  text-decoration: none;
+  color: black;
+}
+
+.invoice-link:hover {
+  color: black;
+}
+
+.invoice-id {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.invoice-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5rem;
+}
+
+.invoice-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0 .5rem 0;
+}
+
+.invoice-status, .invoice-price {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.invoice-icon {
+  color: rgb(52, 52, 52);
+  font-size: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.invoice-status-span {
+  font-weight: 700;
+}

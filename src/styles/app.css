@@ -1,6 +1,10 @@
 @import 'normalize.css';
 @import 'navbar.css';
 @import 'login.css';
+@import 'invoices.css';
+@import 'invoice.css';
+@import 'companies.css';
+@import 'company.css';
 
 html {
   font-size: 2vh;
@@ -16,4 +20,8 @@ body {
 
 #root {
   height: 100vh;
+}
+
+p {
+  margin: 0
 }
