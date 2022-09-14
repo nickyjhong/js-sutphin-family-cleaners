@@ -2,33 +2,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { db } from "../firebase-config";
-import { collectionGroup, query, where, getDocs } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 
 export default function SingleCompany() {
-  let { companyName } = useParams();
-  const [companies, setCompanies] = useState([]);
-  const companiesRef = query(
-    collectionGroup(db, "companies"),
-    where("companyId", "==", companyName)
-  );
+  let { companyId } = useParams();
+  const [company, setCompany] = useState({});
+  const companyRef = doc(db, "companies", companyId);
 
   useEffect(() => {
-    const getCompanies = async () => {
-      const data = await getDocs(companiesRef);
-      setCompanies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const getCompany = async () => {
+      const docSnap = await getDoc(companyRef);
+      setCompany(docSnap.data());
     };
-    getCompanies();
-  }, []);
+    getCompany();
+  });
 
   return (
     <div>
-      {companies.map((company) => {
-        return (
-          <div key={company.id}>
-            <p>{company.name}</p>
-          </div>
-        );
-      })}
+      <p>{company.name}</p>
+      <p>{company.contact}</p>
+      <p>{company.phone}</p>
+      <p>{company.email}</p>
     </div>
   );
 }

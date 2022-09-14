@@ -10,6 +10,7 @@ import Login from './components/Login';
 import AllCompanies from './components/AllCompanies';
 import SingleCompany from './components/SingleCompany';
 import CreateCompany from './components/CreateCompany';
+import UpdateCompany from './components/UpdateCompany';
 import AllInvoices from './components/AllInvoices';
 import SingleInvoice from './components/SingleInvoice';
 import CompanyInvoices from './components/CompanyInvoices';
@@ -65,12 +66,13 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route exact path='/company/add' element={<CreateCompany />} />
             <Route exact path='/company/all' element={<AllCompanies />} />
-            <Route path='/company/:companyName' element={<SingleCompany />} />
+            <Route exact path='/company/:companyId/update' element={<UpdateCompany />} />
+            <Route path='/company/:companyId' element={<SingleCompany />} />
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
             <Route exact path='/invoice/add' element={<CreateInvoice />} />
-            <Route exact path='/invoice/:invoiceId' element={<SingleInvoice />} />
             <Route exact path='/invoice/:invoiceId/update' element={<UpdateInvoice />} />
-            <Route exact path='/:companyName/invoices' element={<CompanyInvoices />} />
+            <Route path='/invoice/:invoiceId' element={<SingleInvoice />} />
+            <Route exact path='/:companyId/invoices' element={<CompanyInvoices />} />
           </>
         ) : (
           <Route path="/" element={<Login setIsAuth={setIsAuth} />} />

@@ -6,9 +6,10 @@ import { db } from "../firebase-config";
 import { collectionGroup, query, where, getDocs } from "firebase/firestore";  
 
 export default function CompanyInvoices() {
-  let { companyName } = useParams();
+  let { companyId } = useParams();
   const [invoices, setInvoices] = useState([]);
-  const invoicesRef = query(collectionGroup(db, 'invoices'), where('companyId', '==', companyName))
+  const invoicesRef = query(collectionGroup(db, 'invoices'), where('companyId', '==', companyId))
+
 
   useEffect(() => {
     const getInvoices = async () => {
