@@ -3,14 +3,14 @@ import { useNavigate } from "react-router";
 import { db } from "../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
 
-export default function CreateCompany() {
+export default function AddCompany() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
-  const createCompany = async () => {
+  const addCompany = async () => {
     let docId = name.split(" ").join("").toLowerCase();
     await setDoc(doc(db, "companies", docId), {
       name,
@@ -71,7 +71,7 @@ export default function CreateCompany() {
         </div>
 
         <div className="form-input-container form-btn-container">
-          <button onClick={createCompany} className="form-create-btn">
+          <button onClick={addCompany} className="form-add-btn">
             Add Company
           </button>
           <a href={`/`} className="form-cancel">

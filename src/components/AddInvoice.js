@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { db } from "../firebase-config";
 import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 
-export default function CreateInvoice() {
+export default function AddInvoice() {
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
   const [invoiceId, setInvoiceId] = useState("");
@@ -17,7 +17,7 @@ export default function CreateInvoice() {
   const [companies, setCompanies] = useState([]);
   const companiesRef = collection(db, "companies");
 
-  const createInvoice = async () => {
+  const addInvoice = async () => {
     let docId = invoiceId.toLowerCase();
     await setDoc(doc(db, "invoices", docId), {
       companyName,
@@ -45,7 +45,7 @@ export default function CreateInvoice() {
   return (
     <div className="form-main">
       <div className="form-container">
-        <h1>Create Invoice</h1>
+        <h1>Add Invoice</h1>
         <div className="form-input-container">
           <label className="form-label-custom">Company name</label>
           <select
@@ -124,8 +124,8 @@ export default function CreateInvoice() {
           />
         </div>
         <div className="form-input-container form-btn-container">
-          <button onClick={createInvoice} className="form-create-btn">
-            Create Invoice
+          <button onClick={addInvoice} className="form-add-btn">
+            Add Invoice
           </button>
           <a href={`/`} className="form-cancel">
             Cancel
