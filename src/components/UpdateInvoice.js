@@ -58,6 +58,7 @@ export default function UpdateInvoice() {
   useEffect(() => {
     setNewCompanyName(invoice.companyName);
     setNewPrice(invoice.price);
+    setNewLink(invoice.link);
     setNewPickUpDate(invoice.pickUpDate);
     setNewDropOffDate(invoice.dropOffDate);
     setNewIsPaid(invoice.isPaid);
