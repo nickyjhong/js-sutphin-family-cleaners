@@ -8,13 +8,6 @@ export default function SingleInvoice() {
   let { invoiceLC } = useParams();
   const [invoice, setInvoice] = useState({});
   const invoiceRef = doc(db, "invoices", invoiceLC);
-  const [numPage, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPage);
-    setPageNumber(1);
-  }
 
   useEffect(() => {
     const getInvoice = async () => {
@@ -44,6 +37,9 @@ export default function SingleInvoice() {
           <p>
             <span className="s-invoice-span">Price:</span> ${invoice.price}
           </p>
+          <a href={`/invoice/${invoice.invoiceLC}/update`}>
+            <button className="s-invoice-update-btn">Update invoice</button>
+          </a>
         </div>
 
         <div className="s-invoice-dates">
