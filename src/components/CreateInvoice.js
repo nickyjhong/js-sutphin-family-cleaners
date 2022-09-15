@@ -42,83 +42,93 @@ export default function CreateInvoice() {
 
   return (
     <div className="form-main">
+      <div className="form-container">
+        <h1>Create Invoice</h1>
+        <div className="form-input-container">
+          <label className="form-label-custom">Company name</label>
+          <select
+            className="form-input-custom"
+            name="company"
+            onChange={(event) => {
+              setCompanyName(event.target.value);
+            }}
+          >
+            <option value="Companies" />
+            {companies.map((company) => {
+              return (
+                <option
+                  key={company.id}
+                  value={company.name}
+                  className="form-select"
+                >
+                  {company.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
 
-    <div className="form-container">
-      <div className="form-input-container">
-        <label className="form-label-custom">Company name</label>
-        <select
-          className="form-input-custom"
-          name="company"
-          onChange={(event) => {
-            setCompanyName(event.target.value);
-          }}
-        >
-          <option value="Companies" />
-          {companies.map((company) => {
-            return (
-              <option key={company.id} value={company.name} className="form-select">
-                {company.name}
-              </option>
-            );
-          })}
-        </select>
+        <div className="form-input-container">
+          <label className="form-label-custom">Invoice number</label>
+          <input
+            className="form-input-custom"
+            placeholder="Invoice #"
+            onChange={(event) => {
+              setInvoiceId(event.target.value);
+            }}
+          />
+        </div>
+        <div className="form-input-container">
+          <label className="form-label-custom">Invoice link</label>
+          <input
+            className="form-input-custom"
+            placeholder="Invoice Link"
+            onChange={(event) => {
+              setLink(event.target.value);
+            }}
+          />
+        </div>
+        <div className="form-input-container">
+          <label className="form-label-custom">Price</label>
+          <input
+            className="form-input-custom"
+            placeholder="Price"
+            onChange={(event) => {
+              setPrice(event.target.value);
+            }}
+          />
+        </div>
+        <div className="form-input-container">
+          <label className="form-label-custom">Pick up date</label>
+          <input
+            type="date"
+            className="form-input-custom form-date"
+            placeholder="Pick Up Date"
+            onChange={(event) => {
+              setPickUpDate(event.target.value);
+            }}
+          />
+        </div>
+        <div className="form-input-container">
+          <label className="form-label-custom">Drop off date</label>
+          <input
+            type="date"
+            className="form-input-custom form-date"
+            placeholder="Drop Off Date"
+            onChange={(event) => {
+              setDropOffDate(event.target.value);
+            }}
+          />
+        </div>
+        <div className="form-input-container form-btn-container">
+          <button onClick={createInvoice} className="form-create-btn">
+            Create Invoice
+          </button>
+          <a href={`/`} className="form-cancel">
+            Cancel
+          </a>
+        </div>
       </div>
-
-      <div className="form-input-container">
-        <label className="form-label-custom">Invoice number</label>
-        <input
-          className="form-input-custom"
-          placeholder="Invoice #"
-          onChange={(event) => {
-            setInvoiceId(event.target.value);
-          }}
-        />
-      </div>
-      <div className="form-input-container">
-        <label className="form-label-custom">Company name</label>
-        <input
-          className="form-input-custom"
-          placeholder="Invoice Link"
-          onChange={(event) => {
-            setLink(event.target.value);
-          }}
-        />
-      </div>
-      <div className="form-input-container">
-        <label className="form-label-custom">Company name</label>
-        <input
-          className="form-input-custom"
-          placeholder="Price"
-          onChange={(event) => {
-            setPrice(event.target.value);
-          }}
-        />
-      </div>
-      <div className="form-input-container">
-        <label className="form-label-custom">Company name</label>
-        <input
-          className="form-input-custom"
-          placeholder="Pick Up Date"
-          onChange={(event) => {
-            setPickUpDate(event.target.value);
-          }}
-        />
-      </div>
-      <div className="form-input-container">
-        <label className="form-label-custom">Company name</label>
-        <input
-          className="form-input-custom"
-          placeholder="Drop Off Date"
-          onChange={(event) => {
-            setDropOffDate(event.target.value);
-          }}
-        />
-      </div>
-      <div className="form-input-container form-btn-container">
-        <button onClick={createInvoice} className="form-create-btn">Create Invoice</button>
-        <a href={`/`} className="form-cancel">Cancel</a>
-      </div>
-    </div>
     </div>
   );
 }

@@ -40,7 +40,13 @@ label, .form-label-custom {
 }
 
 .form-input-custom::placeholder {
-  color: rgb(143, 46, 143)
+  color: rgb(143, 46, 143);
+  padding: .25rem;
+}
+
+.form-date {
+  color: rgb(203, 159, 203);
+  padding: .25rem;
 }
 
 .form-create-btn {

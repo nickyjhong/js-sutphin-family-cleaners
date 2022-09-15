@@ -11,8 +11,8 @@ export default function CreateCompany() {
   const [phone, setPhone] = useState("");
 
   const createCompany = async () => {
-    let docId = name.split(' ').join('').toLowerCase()
-    await setDoc(doc(db, 'companies', docId), {
+    let docId = name.split(" ").join("").toLowerCase();
+    await setDoc(doc(db, "companies", docId), {
       name,
       companyId: docId,
       contact,
@@ -23,35 +23,62 @@ export default function CreateCompany() {
   };
 
   return (
-    <div>
-      <input
-        placeholder="Company Name"
-        onChange={(event) => {
-          setName(event.target.value);
-        }}
-      />
+    <div className="form-main">
+      <div className="form-container">
+        <h1>Add Company</h1>
+        <div className="form-input-container">
+          <label className="form-label-custom">Company name</label>
+          <input
+            className="form-input-custom"
+            placeholder="Company Name"
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        placeholder="Contact Name"
-        onChange={(event) => {
-          setContact(event.target.value);
-        }}
-      />
+        <div className="form-input-container">
+          <label className="form-label-custom">Company name</label>
+          <input
+            className="form-input-custom"
+            placeholder="Contact Name"
+            onChange={(event) => {
+              setContact(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        placeholder="Email"
-        onChange={(event) => {
-          setEmail(event.target.value);
-        }}
-      />
+        <div className="form-input-container">
+          <label className="form-label-custom">Company name</label>
+          <input
+            className="form-input-custom"
+            placeholder="Email"
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        placeholder="Phone"
-        onChange={(event) => {
-          setPhone(event.target.value);
-        }}
-      />
-      <button onClick={createCompany}>Add Company</button>
+        <div className="form-input-container">
+          <label className="form-label-custom">Company name</label>
+          <input
+            className="form-input-custom"
+            placeholder="Phone"
+            onChange={(event) => {
+              setPhone(event.target.value);
+            }}
+          />
+        </div>
+
+        <div className="form-input-container form-btn-container">
+          <button onClick={createCompany} className="form-create-btn">
+            Add Company
+          </button>
+          <a href={`/`} className="form-cancel">
+            Cancel
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
