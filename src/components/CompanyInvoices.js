@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { db } from "../firebase-config";
-import { collectionGroup, query, where, getDocs } from "firebase/firestore";
+import { collectionGroup, query, where, getDocs, orderBy } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
@@ -15,7 +15,8 @@ export default function CompanyInvoices() {
   const [invoices, setInvoices] = useState([]);
   const invoicesRef = query(
     collectionGroup(db, "invoices"),
-    where("companyId", "==", companyId)
+    where("companyId", "==", companyId),
+    orderBy("pickUpDate", "desc")
   );
 
   useEffect(() => {
@@ -35,8 +36,8 @@ export default function CompanyInvoices() {
             key={invoice.id}
             className={
               invoice.isPaid
-                ? "invoice-paid invoice-container"
-                : "invoice-unpaid invoice-container"
+                ? "invoice-paid c-invoice-container"
+                : "invoice-unpaid c-invoice-container"
             }
           >
             <div className="invoice-top-row">

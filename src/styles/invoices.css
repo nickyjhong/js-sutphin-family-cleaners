@@ -19,6 +19,14 @@
   margin: 2rem 3rem 1rem 3rem;
 }
 
+.c-invoice-container {
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.01);
+  padding: .5rem 1rem;
+  margin: 2rem 2rem 1rem 0rem;
+  width: 30rem;
+}
+
 .invoice-link {
   text-decoration: none;
   color: black;
@@ -45,7 +53,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 0 .5rem 0;
+  margin: .25rem 0 .5rem 0;
 }
 
 .invoice-status, .invoice-price {
@@ -59,10 +67,18 @@
   padding-left: 1.5rem;
 }
 
+.invoice-icon:hover {
+  color: rgb(79, 151, 177)
+}
+
 .invoice-status-span {
   font-weight: 700;
 }
 
 .invoice-heading-center {
   text-align: center;
+}
+
+.invoice-company {
+  font-size: 1.25rem;
 }

@@ -1,0 +1,12 @@
+.home-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-company {
+  width: 55vw;
+}
+
+.home-invoice {
+  width: 55vw;
+}

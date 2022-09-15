@@ -6,6 +6,7 @@
 @import 'companies.css';
 @import 'company.css';
 @import 'form.css';
+@import 'home.css';
 
 html {
   font-size: 2vh;

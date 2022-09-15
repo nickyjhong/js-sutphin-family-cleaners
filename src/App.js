@@ -68,7 +68,7 @@ function App() {
             <Route exact path='/company/add' element={<AddCompany />} />
             <Route exact path='/company/all' element={<AllCompanies />} />
             <Route exact path='/company/:companyId/update' element={<UpdateCompany />} />
-            <Route exact path='/company/:companyId/invoices' element={<CompanyInvoices />} />
+            {/* <Route exact path='/company/:companyId/invoices' element={<CompanyInvoices />} /> */}
             <Route path='/company/:companyId' element={<SingleCompany />} />
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
             <Route exact path='/invoice/add' element={<AddInvoice />} />

@@ -44,7 +44,9 @@ export default function AddInvoice() {
     <div className="form-main">
       <div className="form-container">
         <h1>Add Invoice</h1>
+          <form>
         <div className="form-input-container">
+
           <label className="form-label-custom">Company name</label>
           <select
             className="form-input-custom"
@@ -71,6 +73,7 @@ export default function AddInvoice() {
         <div className="form-input-container">
           <label className="form-label-custom">Invoice number</label>
           <input
+            required
             className="form-input-custom"
             placeholder="Invoice #"
             onChange={(event) => {
@@ -81,6 +84,7 @@ export default function AddInvoice() {
         <div className="form-input-container">
           <label className="form-label-custom">Invoice link</label>
           <input
+            required
             className="form-input-custom"
             placeholder="Invoice Link"
             onChange={(event) => {
@@ -92,6 +96,8 @@ export default function AddInvoice() {
         <div className="form-input-container">
           <label className="form-label-custom">Price</label>
           <input
+            required
+            type="number"
             className="form-input-custom"
             placeholder="Price"
             onChange={(event) => {
@@ -102,6 +108,7 @@ export default function AddInvoice() {
         <div className="form-input-container">
           <label className="form-label-custom">Pick up date</label>
           <input
+            required
             type="date"
             className="form-input-custom form-date"
             placeholder="Pick Up Date"
@@ -113,6 +120,7 @@ export default function AddInvoice() {
         <div className="form-input-container">
           <label className="form-label-custom">Drop off date</label>
           <input
+            required
             type="date"
             className="form-input-custom form-date"
             placeholder="Drop Off Date"
@@ -129,6 +137,7 @@ export default function AddInvoice() {
             Cancel
           </a>
         </div>
+          </form>
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { db } from "../firebase-config";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 
 export default function UpdateCompany() {
   let { companyId } = useParams();
+  const navigate = useNavigate()
   const [company, setCompany] = useState({});
   const companyRef = doc(db, "companies", companyId);
 
@@ -16,6 +17,7 @@ export default function UpdateCompany() {
   const updateCompany = async (id, contact, email, phone) => {
     const newFields = { contact: newContact, email: newEmail, phone: newPhone };
     await updateDoc(companyRef, newFields);
+    navigate(`/company/${companyId}`)
   };
 
   useEffect(() => {

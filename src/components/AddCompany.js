@@ -29,6 +29,7 @@ export default function AddCompany() {
         <div className="form-input-container">
           <label className="form-label-custom">Company name</label>
           <input
+            required
             className="form-input-custom"
             placeholder="Company Name"
             onChange={(event) => {
@@ -38,8 +39,9 @@ export default function AddCompany() {
         </div>
 
         <div className="form-input-container">
-          <label className="form-label-custom">Company name</label>
+          <label className="form-label-custom">Contact name</label>
           <input
+            required
             className="form-input-custom"
             placeholder="Contact Name"
             onChange={(event) => {
@@ -49,8 +51,10 @@ export default function AddCompany() {
         </div>
 
         <div className="form-input-container">
-          <label className="form-label-custom">Company name</label>
+          <label className="form-label-custom">Contact email</label>
           <input
+            required
+            type="email"
             className="form-input-custom"
             placeholder="Email"
             onChange={(event) => {
@@ -60,8 +64,9 @@ export default function AddCompany() {
         </div>
 
         <div className="form-input-container">
-          <label className="form-label-custom">Company name</label>
+          <label className="form-label-custom">Contact phone</label>
           <input
+            required
             className="form-input-custom"
             placeholder="Phone"
             onChange={(event) => {

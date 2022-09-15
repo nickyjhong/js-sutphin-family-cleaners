@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase-config";
-import { collectionGroup, query, getDocs } from "firebase/firestore";
+import { collectionGroup, query, getDocs, orderBy } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faPenToSquare, faFilePdf } from '@fortawesome/free-solid-svg-icons'
 
 export default function AllInvoices() {
   const [invoices, setInvoices] = useState([]);
-  const invoicesRef = query(collectionGroup(db, "invoices"));
+  const invoicesRef = query(collectionGroup(db, "invoices"), orderBy("pickUpDate", "desc"));
 
   useEffect(() => {
     const getInvoices = async () => {
@@ -38,6 +38,8 @@ export default function AllInvoices() {
                 </div>
               </div>
               <div className="invoice-bottom-row">
+                <p className="invoice-company">{invoice.companyName}</p>
+                <div>
                 {invoice.isPaid ? (
                   <p className="invoice-status invoice-status-paid">
                     Status: <span className="invoice-status-span">Paid</span>
@@ -48,6 +50,7 @@ export default function AllInvoices() {
                   </p>
                 )}
                 <p className="invoice-price">Price: ${invoice.price}</p>
+                </div>
               </div>
           </div>
         );

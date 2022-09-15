@@ -1,5 +1,5 @@
 .s-invoice-container {
-  margin: 2rem 3rem;
+  margin: 3rem;
 }
 
 .s-invoice-heading, .s-invoice-status {
@@ -33,7 +33,6 @@
   font-size: .9rem;
   font-weight: 700;
   padding: .25rem;
-
   width: 9rem;
   border-radius: 100px;
   border: none;

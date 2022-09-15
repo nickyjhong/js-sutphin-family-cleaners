@@ -9,14 +9,13 @@ export default function UpdateInvoice() {
   const navigate = useNavigate();
   const [invoice, setInvoice] = useState({});
   const invoiceRef = doc(db, "invoices", invoiceLC);
-
   const [newCompanyName, setNewCompanyName] = useState("");
   const [newLink, setNewLink] = useState("");
   const [newPrice, setNewPrice] = useState("");
   const [newPickUpDate, setNewPickUpDate] = useState("");
   const [newDropOffDate, setNewDropOffDate] = useState("");
   const [newIsPaid, setNewIsPaid] = useState(invoice.isPaid);
-  const [paid, setPaid] = useState(newIsPaid);
+  const [paid, setPaid] = useState(invoice.isPaid);
 
   const handlePaid = async () => {
     setNewIsPaid((newIsPaid) => !newIsPaid);
@@ -36,7 +35,6 @@ export default function UpdateInvoice() {
     price,
     pickUpDate,
     dropOffDate,
-    isPaid
   ) => {
     const newFields = {
       companyName: newCompanyName,
@@ -44,7 +42,6 @@ export default function UpdateInvoice() {
       price: newPrice,
       pickUpDate: newPickUpDate,
       dropOffDate: newDropOffDate,
-      isPaid: newIsPaid,
     };
     await updateDoc(invoiceRef, newFields);
     navigate(`/invoice/${invoiceLC}`);
@@ -64,6 +61,7 @@ export default function UpdateInvoice() {
     setNewPickUpDate(invoice.pickUpDate);
     setNewDropOffDate(invoice.dropOffDate);
     setNewIsPaid(invoice.isPaid);
+    setPaid(invoice.isPaid)
   }, [invoice]);
 
   return (

@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { db } from "../firebase-config";
 import { collectionGroup, query, getDocs } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
   faPenToSquare,
-  faFilePdf,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function AllCompanies() {
