@@ -6,18 +6,23 @@ import { getDoc, doc, updateDoc } from "firebase/firestore";
 
 export default function UpdateCompany() {
   let { companyId } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [company, setCompany] = useState({});
   const companyRef = doc(db, "companies", companyId);
-
+  const [newAddress, setNewAddress] = useState("");
   const [newContact, setNewContact] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPhone, setNewPhone] = useState("");
 
   const updateCompany = async (id, contact, email, phone) => {
-    const newFields = { contact: newContact, email: newEmail, phone: newPhone };
+    const newFields = {
+      contact: newContact,
+      email: newEmail,
+      phone: newPhone,
+      address: newAddress,
+    };
     await updateDoc(companyRef, newFields);
-    navigate(`/company/${companyId}`)
+    navigate(`/company/${companyId}`);
   };
 
   useEffect(() => {
@@ -29,6 +34,7 @@ export default function UpdateCompany() {
   }, []);
 
   useEffect(() => {
+    setNewAddress(company.address);
     setNewContact(company.contact);
     setNewEmail(company.email);
     setNewPhone(company.phone);
@@ -38,6 +44,18 @@ export default function UpdateCompany() {
     <div className="form-main">
       <div className="form-container">
         <h1>Update {company.name}</h1>
+        <div className="form-input-container">
+          <label className="form-label-custom">Address</label>
+          <input
+            className="form-input-custom"
+            name="address"
+            defaultValue={company.address}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewAddress(event.target.value);
+            }}
+          />
+        </div>
         <div className="form-input-container">
           <label className="form-label-custom">Contact</label>
           <input
