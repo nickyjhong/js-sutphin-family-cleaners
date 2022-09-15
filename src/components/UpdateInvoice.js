@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useHistory } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { db } from "../firebase-config";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 
@@ -69,12 +69,16 @@ export default function UpdateInvoice() {
   return (
     <div className="form-main">
       <div className="form-container">
-      <h1>Update {invoice.invoiceId}</h1>
-        {paid ? 
-          <p className="form-status">Status: <span className="form-span-paid">PAID</span></p>
-        : 
-          <p className="form-status">Status: <span className="form-span-unpaid">UNPAID</span></p>
-        }
+        <h1>Update {invoice.invoiceId}</h1>
+        {paid ? (
+          <p className="form-status">
+            Status: <span className="form-span-paid">PAID</span>
+          </p>
+        ) : (
+          <p className="form-status">
+            Status: <span className="form-span-unpaid">UNPAID</span>
+          </p>
+        )}
         <div className="form-input-container">
           <label className="form-label-custom">Company name</label>
           <input
@@ -142,9 +146,13 @@ export default function UpdateInvoice() {
 
         <div className="form-input-container form-btn-container">
           {paid ? (
-            <button onClick={handlePaid} className="form-not-paid-btn">Not paid</button>
+            <button onClick={handlePaid} className="form-not-paid-btn">
+              Not paid
+            </button>
           ) : (
-            <button onClick={handlePaid} className="form-paid-btn">Paid</button>
+            <button onClick={handlePaid} className="form-paid-btn">
+              Paid
+            </button>
           )}
           <button
             onClick={() => {

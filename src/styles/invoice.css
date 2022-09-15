@@ -1,0 +1,28 @@
+.s-invoice-container {
+  margin: 2rem 3rem;
+}
+
+.s-invoice-heading, .s-invoice-status {
+  text-align: center;
+}
+
+.s-invoice-dates, .s-invoice-price {
+  font-size: 1.25rem;
+}
+
+.s-invoice-dates {
+  width: 17rem;
+}
+
+.s-invoice-span {
+  font-weight: 700;
+}
+
+.s-invoice-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.s-invoice-pdf {
+  text-align: center;
+}

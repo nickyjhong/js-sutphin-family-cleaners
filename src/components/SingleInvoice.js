@@ -5,24 +5,61 @@ import { db } from "../firebase-config";
 import { getDoc, doc } from "firebase/firestore";
 
 export default function SingleInvoice() {
-
   let { invoiceLC } = useParams();
   const [invoice, setInvoice] = useState({});
   const invoiceRef = doc(db, "invoices", invoiceLC);
+  const [numPage, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPage);
+    setPageNumber(1);
+  }
 
   useEffect(() => {
     const getInvoice = async () => {
-      const docSnap = await getDoc(invoiceRef)
-      setInvoice(docSnap.data())
-    }
-    getInvoice()
-  }, [])
+      const docSnap = await getDoc(invoiceRef);
+      setInvoice(docSnap.data());
+    };
+    getInvoice();
+  }, []);
 
-
-
+  console.log("invoice", invoice);
   return (
-    <div>
-      <p>{invoice.invoiceId}</p>
+    <div className="s-invoice-container">
+      <h2 className="s-invoice-heading">Invoice # {invoice.invoiceId}</h2>
+
+      {invoice.isPaid ? (
+        <p className="form-status s-invoice-status">
+          Status: <span className="form-span-paid">PAID</span>
+        </p>
+      ) : (
+        <p className="form-status s-invoice-status">
+          Status: <span className="form-span-unpaid">UNPAID</span>
+        </p>
+      )}
+
+      <div className="s-invoice-row">
+        <div className="s-invoice-price">
+          <p>
+            <span className="s-invoice-span">Price:</span> ${invoice.price}
+          </p>
+        </div>
+
+        <div className="s-invoice-dates">
+          <p>
+            <span className="s-invoice-span">Pick up date: </span>
+            {invoice.pickUpDate}
+          </p>
+          <p>
+            <span className="s-invoice-span">Drop off date: </span>
+            {invoice.dropOffDate}
+          </p>
+        </div>
+      </div>
+      <div className="s-invoice-pdf">
+        <iframe src="https://drive.google.com/file/d/1Pxf-m8WVNB3-7pCo7upLQ8a-zmL6crQ8/preview" title={invoice.invoiceId} width="700" height="900" allow="autoplay"></iframe>
+      </div>
     </div>
   );
 }

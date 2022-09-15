@@ -9,6 +9,7 @@ export default function CreateInvoice() {
   const [companyName, setCompanyName] = useState("");
   const [invoiceId, setInvoiceId] = useState("");
   const [link, setLink] = useState("");
+  const [pdf, setPDF] = useState("")
   const [price, setPrice] = useState("");
   const [pickUpDate, setPickUpDate] = useState("");
   const [dropOffDate, setDropOffDate] = useState("");
@@ -23,6 +24,7 @@ export default function CreateInvoice() {
       companyId: companyName.split(" ").join("").toLowerCase(),
       invoiceId,
       link,
+      pdf: `${link}/preview`,
       invoiceLC: invoiceId.toLowerCase(),
       price: Number(price),
       pickUpDate,
@@ -88,6 +90,7 @@ export default function CreateInvoice() {
             }}
           />
         </div>
+
         <div className="form-input-container">
           <label className="form-label-custom">Price</label>
           <input
