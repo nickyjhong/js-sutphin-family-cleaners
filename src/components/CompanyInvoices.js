@@ -28,7 +28,7 @@ export default function CompanyInvoices() {
   }, []);
 
   return (
-    <div>
+    <div className="s-company-invoice-container">
       {invoices ? (
         invoices.map((invoice) => {
         return (
