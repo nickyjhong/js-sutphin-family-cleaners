@@ -53,7 +53,7 @@ export default function SingleInvoice() {
         </div>
       </div>
       <div className="s-invoice-pdf">
-        <iframe src="https://drive.google.com/file/d/1Pxf-m8WVNB3-7pCo7upLQ8a-zmL6crQ8/preview" title={invoice.invoiceId} width="700" height="900" allow="autoplay"></iframe>
+        <iframe src={invoice.pdf} title={invoice.invoiceId} width="700" height="900" allow="autoplay"></iframe>
       </div>
     </div>
   );
