@@ -27,46 +27,68 @@ export default function UpdateCompany() {
   }, []);
 
   useEffect(() => {
-    setNewContact(company.contact)
-    setNewEmail(company.email)
-    setNewPhone(company.phone)
-  },[company])
+    setNewContact(company.contact);
+    setNewEmail(company.email);
+    setNewPhone(company.phone);
+  }, [company]);
 
   return (
-    <div>
-      <input
-        name="contact"
-        defaultValue={company.contact}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewContact(event.target.value);
-        }}
-      />
+    <div className="form-main">
+      <div className="form-container">
+        <h1>Update {company.name}</h1>
+        <div className="form-input-container">
+          <label className="form-label-custom">Contact</label>
+          <input
+            className="form-input-custom"
+            name="contact"
+            defaultValue={company.contact}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewContact(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        name="email"
-        defaultValue={company.email}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewEmail(event.target.value);
-        }}
-      />
+        <div className="form-input-container">
+          <label className="form-label-custom">Email</label>
+          <input
+            className="form-input-custom"
+            name="email"
+            defaultValue={company.email}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewEmail(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        name="phone"
-        defaultValue={company.phone}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewPhone(event.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          updateCompany(company.id);
-        }}
-      >
-        Save Changes
-      </button>
+        <div className="form-input-container">
+          <label className="form-label-custom">Phone number</label>
+          <input
+            className="form-input-custom"
+            name="phone"
+            defaultValue={company.phone}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewPhone(event.target.value);
+            }}
+          />
+        </div>
+
+        <div className="form-input-container form-btn-container">
+          <button
+            onClick={() => {
+              updateCompany(company.id);
+            }}
+            className="form-save-btn"
+          >
+            Save Changes
+          </button>
+          <a href={`/company/${company.companyId}`} className="form-cancel">
+            Cancel
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

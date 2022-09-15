@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useHistory } from "react-router";
 import { db } from "../firebase-config";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 
@@ -69,6 +69,7 @@ export default function UpdateInvoice() {
   return (
     <div className="form-main">
       <div className="form-container">
+      <h1>Update {invoice.invoiceId}</h1>
         {paid ? 
           <p className="form-status">Status: <span className="form-span-paid">PAID</span></p>
         : 
@@ -153,7 +154,7 @@ export default function UpdateInvoice() {
           >
             Save Changes
           </button>
-          <a href={`/`} className="form-cancel">
+          <a href={`/invoice/${invoice.invoiceLC}`} className="form-cancel">
             Cancel
           </a>
         </div>

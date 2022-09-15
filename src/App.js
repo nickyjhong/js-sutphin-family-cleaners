@@ -68,12 +68,12 @@ function App() {
             <Route exact path='/company/add' element={<CreateCompany />} />
             <Route exact path='/company/all' element={<AllCompanies />} />
             <Route exact path='/company/:companyId/update' element={<UpdateCompany />} />
+            <Route exact path='/company/:companyId/invoices' element={<CompanyInvoices />} />
             <Route path='/company/:companyId' element={<SingleCompany />} />
             <Route exact path='/invoice/all' element={<AllInvoices /> } />
             <Route exact path='/invoice/add' element={<CreateInvoice />} />
             <Route exact path='/invoice/:invoiceLC' element={<SingleInvoice />} />
             <Route exact path='/invoice/:invoiceLC/update' element={<UpdateInvoice />} />
-            <Route exact path='/:companyId/invoices' element={<CompanyInvoices />} />
           </>
         ) : (
           <Route path="/" element={<Login setIsAuth={setIsAuth} />} />
