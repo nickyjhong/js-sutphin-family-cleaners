@@ -6,6 +6,7 @@ import { setDoc, doc } from "firebase/firestore";
 export default function AddCompany() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -15,6 +16,7 @@ export default function AddCompany() {
     await setDoc(doc(db, "companies", docId), {
       name,
       companyId: docId,
+      address,
       contact,
       email,
       phone,
@@ -34,6 +36,18 @@ export default function AddCompany() {
             placeholder="Company Name"
             onChange={(event) => {
               setName(event.target.value);
+            }}
+          />
+        </div>
+
+        <div className="form-input-container">
+          <label className="form-label-custom">Address</label>
+          <input
+            required
+            className="form-input-custom"
+            placeholder="Address"
+            onChange={(event) => {
+              setAddress(event.target.value);
             }}
           />
         </div>
