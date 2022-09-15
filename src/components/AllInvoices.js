@@ -19,10 +19,10 @@ export default function AllInvoices() {
 
   return (
     <div className="invoices-container">
+      <h2 className="invoice-heading-center">Invoices</h2>
       {invoices.map((invoice) => {
         return (
           <div key={invoice.id} className={invoice.isPaid ? "invoice-paid invoice-container" : "invoice-unpaid invoice-container"}>
-
               <div className="invoice-top-row">
                 <p className="invoice-id">Invoice: {invoice.invoiceId}</p>
                 <div className="invoice-btns">

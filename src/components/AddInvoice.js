@@ -9,11 +9,9 @@ export default function AddInvoice() {
   const [companyName, setCompanyName] = useState("");
   const [invoiceId, setInvoiceId] = useState("");
   const [link, setLink] = useState("");
-  const [pdf, setPDF] = useState("")
   const [price, setPrice] = useState("");
   const [pickUpDate, setPickUpDate] = useState("");
   const [dropOffDate, setDropOffDate] = useState("");
-  const [isPaid, setIsPaid] = useState(false);
   const [companies, setCompanies] = useState([]);
   const companiesRef = collection(db, "companies");
 
@@ -29,7 +27,7 @@ export default function AddInvoice() {
       price: Number(price),
       pickUpDate,
       dropOffDate,
-      isPaid,
+      isPaid: false,
     });
     navigate("/");
   };

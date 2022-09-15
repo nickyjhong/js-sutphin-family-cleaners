@@ -1,5 +1,5 @@
 .invoices-container {
-  margin: 1rem;
+  margin: 3rem 2rem;
 }
 
 .invoice-paid {
@@ -14,7 +14,6 @@
 
 .invoice-container {
   border-radius: 5px;
-
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.01);
   padding: .5rem 1rem;
   margin: 2rem 3rem 1rem 3rem;
@@ -62,4 +61,8 @@
 
 .invoice-status-span {
   font-weight: 700;
+}
+
+.invoice-heading-center {
+  text-align: center;
 }

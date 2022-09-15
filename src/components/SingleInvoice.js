@@ -17,7 +17,6 @@ export default function SingleInvoice() {
     getInvoice();
   }, []);
 
-  console.log("invoice", invoice);
   return (
     <div className="s-invoice-container">
       <h2 className="s-invoice-heading">Invoice # {invoice.invoiceId}</h2>
