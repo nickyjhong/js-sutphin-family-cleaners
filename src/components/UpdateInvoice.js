@@ -67,67 +67,97 @@ export default function UpdateInvoice() {
   }, [invoice]);
 
   return (
-    <div>
-      {paid ? <p>Status: PAID</p> : <p>Status: UNPAID</p>}
+    <div className="form-main">
+      <div className="form-container">
+        {paid ? 
+          <p className="form-status">Status: <span className="form-span-paid">PAID</span></p>
+        : 
+          <p className="form-status">Status: <span className="form-span-unpaid">UNPAID</span></p>
+        }
+        <div className="form-input-container">
+          <label className="form-label-custom">Company name</label>
+          <input
+            className="form-input-custom"
+            name="Company Name"
+            defaultValue={invoice.companyName}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewCompanyName(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        name="Company Name"
-        defaultValue={invoice.companyName}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewCompanyName(event.target.value);
-        }}
-      />
+        <div className="form-input-container">
+          <label className="form-label-custom">Invoice link</label>
+          <input
+            className="form-input-custom"
+            name="link"
+            defaultValue={invoice.link}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewLink(event.target.value);
+            }}
+          />
+        </div>
+        <div className="form-input-container">
+          <label className="form-label-custom">Price</label>
+          <input
+            className="form-input-custom"
+            name="price"
+            defaultValue={invoice.price}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewPrice(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        name="link"
-        defaultValue={invoice.link}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewLink(event.target.value);
-        }}
-      />
+        <div className="form-input-container">
+          <label className="form-label-custom">Pick up date</label>
+          <input
+            type="date"
+            className="form-input-custom form-date"
+            name="pickUpDate"
+            defaultValue={invoice.pickUpDate}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewPickUpDate(event.target.value);
+            }}
+          />
+        </div>
+        <div className="form-input-container">
+          <label className="form-label-custom">Drop off date</label>
+          <input
+            type="date"
+            className="form-input-custom form-date"
+            name="dropOffDate"
+            defaultValue={invoice.dropOffDate}
+            onChange={(event) => {
+              event.preventDefault();
+              setNewDropOffDate(event.target.value);
+            }}
+          />
+        </div>
 
-      <input
-        name="price"
-        defaultValue={invoice.price}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewPrice(event.target.value);
-        }}
-      />
-
-      <input
-        name="pickUpDate"
-        defaultValue={invoice.pickUpDate}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewPickUpDate(event.target.value);
-        }}
-      />
-
-      <input
-        name="dropOffDate"
-        defaultValue={invoice.dropOffDate}
-        onChange={(event) => {
-          event.preventDefault();
-          setNewDropOffDate(event.target.value);
-        }}
-      />
-
-      {paid ? (
-        <button onClick={handlePaid}>Already paid!</button>
-      ) : (
-        <button onClick={handlePaid}>Pay</button>
-      )}
-
-      <button
-        onClick={() => {
-          updateInvoice(invoice.id);
-        }}
-      >
-        Save Changes
-      </button>
+        <div className="form-input-container form-btn-container">
+          {paid ? (
+            <button onClick={handlePaid} className="form-not-paid-btn">Not paid</button>
+          ) : (
+            <button onClick={handlePaid} className="form-paid-btn">Paid</button>
+          )}
+          <button
+            onClick={() => {
+              updateInvoice(invoice.id);
+            }}
+            className="form-save-btn"
+          >
+            Save Changes
+          </button>
+          <a href={`/`} className="form-cancel">
+            Cancel
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

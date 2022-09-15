@@ -63,6 +63,20 @@ label, .form-label-custom {
   background: linear-gradient(90deg, rgba(214,109,93,1) 0%, rgba(255,149,88,1) 71%);
 }
 
+.form-save-btn {
+  cursor: pointer;
+  font-size: .9rem;
+  font-weight: 700;
+  margin: 10px auto 0;
+  padding: 12px 5px;
+  width: 35%;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  color: white;
+  background: linear-gradient(90deg, rgb(118, 183, 194) 0%, rgb(95, 126, 221) 71%);
+}
+
 .form-cancel {
   text-decoration: none;
   color: gray;
@@ -73,4 +87,46 @@ label, .form-label-custom {
   display: flex;
   align-items: center;
   gap: .5rem;
+}
+
+.form-status {
+  font-size: 1.5rem;
+}
+
+.form-span-paid {
+  font-weight: 700;
+  color: green;
+}
+
+.form-span-unpaid {
+  font-weight: 700;
+  color: rgb(235, 57, 57);
+}
+
+.form-paid-btn {
+  cursor: pointer;
+  font-size: .9rem;
+  font-weight: 700;
+  margin: 10px auto 0;
+  padding: 12px 5px;
+  width: 35%;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  color: white;
+  background: linear-gradient(90deg, rgb(118, 194, 130) 0%, rgb(150, 218, 121) 71%);
+}
+
+.form-not-paid-btn {
+  cursor: pointer;
+  font-size: .9rem;
+  font-weight: 700;
+  margin: 10px auto 0;
+  padding: 12px 5px;
+  width: 35%;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  color: white;
+  background: linear-gradient(90deg, rgb(194, 118, 118) 0%, rgb(229, 93, 47) 71%);
 }
